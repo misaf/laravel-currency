@@ -83,6 +83,7 @@ final class CurrencyTable
                         Action::make('updateSellPrice')
                             ->schema([
                                 TextInput::make('sell_price')
+                                    ->default(fn(Currency $record) => $record->sell_price)
                                     ->extraInputAttributes(['dir' => 'ltr'])
                                     ->inputMode('number')
                                     ->required()
