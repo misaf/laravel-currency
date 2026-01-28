@@ -74,11 +74,11 @@ final class CurrencyTable
                                 $record->buy_price = $data['buy_price'];
                                 $record->save();
 
-                                if ($record->wasChanged('buy_price')){
+                                if ($record->wasChanged('buy_price')) {
                                     Notification::make()
-                                    ->title(__(':iso_code Buy Price changed Successfully', ['iso_code' => $record->iso_code]))
-                                    ->success()
-                                    ->send(); 
+                                        ->title(__(':iso_code Buy Price changed Successfully', ['iso_code' => $record->iso_code]))
+                                        ->success()
+                                        ->send();
                                 }
                             })
                             ->label(fn(Currency $record) => __('Update :name', ['name' => $record->name]))
@@ -103,11 +103,11 @@ final class CurrencyTable
                                 $record->sell_price = $data['sell_price'];
                                 $record->save();
 
-                                if ($record->wasChanged('sell_price')){
+                                if ($record->wasChanged('sell_price')) {
                                     Notification::make()
-                                    ->title(__(':iso_code Sell Price changed Successfully', ['iso_code' => $record->iso_code]))
-                                    ->success()
-                                    ->send(); 
+                                        ->title(__(':iso_code Sell Price changed Successfully', ['iso_code' => $record->iso_code]))
+                                        ->success()
+                                        ->send();
                                 }
                             })
                             ->label(fn(Currency $record) => __('Update :name', ['name' => $record->name]))

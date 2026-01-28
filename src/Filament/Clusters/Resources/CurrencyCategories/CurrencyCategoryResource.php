@@ -4,6 +4,9 @@ declare(strict_types=1);
 
 namespace Misaf\Currency\Filament\Clusters\Resources\CurrencyCategories;
 
+use Filament\Resources\Resource;
+use Filament\Schemas\Schema;
+use Filament\Tables\Table;
 use Misaf\Currency\Filament\Clusters\CurrenciesCluster;
 use Misaf\Currency\Filament\Clusters\Resources\Currencies\RelationManagers\CurrencyRelationManager;
 use Misaf\Currency\Filament\Clusters\Resources\CurrencyCategories\Pages\CreateCurrencyCategory;
@@ -12,9 +15,6 @@ use Misaf\Currency\Filament\Clusters\Resources\CurrencyCategories\Pages\ListCurr
 use Misaf\Currency\Filament\Clusters\Resources\CurrencyCategories\Pages\ViewCurrencyCategory;
 use Misaf\Currency\Filament\Clusters\Resources\CurrencyCategories\Schemas\CurrencyCategoryForm;
 use Misaf\Currency\Filament\Clusters\Resources\CurrencyCategories\Schemas\CurrencyCategoryTable;
-use Filament\Resources\Resource;
-use Filament\Schemas\Schema;
-use Filament\Tables\Table;
 use Misaf\Currency\Models\CurrencyCategory;
 
 final class CurrencyCategoryResource extends Resource

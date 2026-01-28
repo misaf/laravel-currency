@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Misaf\Currency;
 
 use Filament\Contracts\Plugin;
@@ -38,7 +40,5 @@ class CurrencyPlugin implements Plugin
             );
     }
 
-    public function boot(Panel $panel): void
-    {
-    }
+    public function boot(Panel $panel): void {}
 }

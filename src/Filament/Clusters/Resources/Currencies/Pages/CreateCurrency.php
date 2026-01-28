@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace Misaf\Currency\Filament\Clusters\Resources\Currencies\Pages;
 
-use Misaf\Currency\Filament\Clusters\Resources\Currencies\CurrencyResource;
 use Filament\Resources\Pages\CreateRecord;
+use Misaf\Currency\Filament\Clusters\Resources\Currencies\CurrencyResource;
 
 final class CreateCurrency extends CreateRecord
 {

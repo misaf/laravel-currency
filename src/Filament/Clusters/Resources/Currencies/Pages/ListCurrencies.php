@@ -4,9 +4,9 @@ declare(strict_types=1);
 
 namespace Misaf\Currency\Filament\Clusters\Resources\Currencies\Pages;
 
-use Misaf\Currency\Filament\Clusters\Resources\Currencies\CurrencyResource;
 use Filament\Actions\CreateAction;
 use Filament\Resources\Pages\ListRecords;
+use Misaf\Currency\Filament\Clusters\Resources\Currencies\CurrencyResource;
 
 final class ListCurrencies extends ListRecords
 {

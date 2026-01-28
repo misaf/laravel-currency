@@ -4,9 +4,9 @@ declare(strict_types=1);
 
 namespace Misaf\Currency\Filament\Clusters\Resources\CurrencyCategories\Pages;
 
-use Misaf\Currency\Filament\Clusters\Resources\CurrencyCategories\CurrencyCategoryResource;
 use Filament\Actions\EditAction;
 use Filament\Resources\Pages\ViewRecord;
+use Misaf\Currency\Filament\Clusters\Resources\CurrencyCategories\CurrencyCategoryResource;
 
 final class ViewCurrencyCategory extends ViewRecord
 {

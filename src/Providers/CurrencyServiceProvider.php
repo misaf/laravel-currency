@@ -4,17 +4,16 @@ declare(strict_types=1);
 
 namespace Misaf\Currency\Providers;
 
-use Illuminate\Support\ServiceProvider;
 use Filament\Panel;
+use Illuminate\Support\ServiceProvider;
 use Misaf\Currency\CurrencyPlugin;
 
 final class CurrencyServiceProvider extends ServiceProvider
 {
-
     public function register(): void
     {
         Panel::configureUsing(function (Panel $panel): void {
-            if ($panel->getId() !== 'admin') {
+            if ('admin' !== $panel->getId()) {
                 return;
             }
 
