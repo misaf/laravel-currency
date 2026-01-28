@@ -14,6 +14,7 @@ use Filament\Actions\DeleteBulkAction;
 use Filament\Actions\EditAction;
 use Filament\Actions\ViewAction;
 use Filament\Forms\Components\TextInput;
+use Filament\Notifications\Notification;
 use Filament\Support\Enums\Size;
 use Filament\Tables\Columns\SpatieMediaLibraryImageColumn;
 use Filament\Tables\Columns\TextColumn;
@@ -65,15 +66,23 @@ final class CurrencyTable
                                     ->default(fn(Currency $record) => $record->buy_price)
                                     ->extraInputAttributes(['dir' => 'ltr'])
                                     ->label(__('currency::attributes.buy_price'))
-                                    ->required()
-                                    ->inputMode('number'),
+                                    ->inputMode('number')
+                                    ->numeric()
+                                    ->required(),
                             ])
                             ->action(function (array $data, Currency $record): void {
                                 $record->buy_price = $data['buy_price'];
                                 $record->save();
+
+                                if ($record->wasChanged('buy_price')){
+                                    Notification::make()
+                                    ->title(__(':iso_code Buy Price changed Successfully', ['iso_code' => $record->iso_code]))
+                                    ->success()
+                                    ->send(); 
+                                }
                             })
-                            // ->successNotification()
-                            ->label(__('Update %s', [__('currency::attributes.buy_price')])),
+                            ->label(fn(Currency $record) => __('Update :name', ['name' => $record->name]))
+                            ->requiresConfirmation(),
                     ),
 
                 TextColumn::make('sell_price')
@@ -86,14 +95,23 @@ final class CurrencyTable
                                     ->default(fn(Currency $record) => $record->sell_price)
                                     ->extraInputAttributes(['dir' => 'ltr'])
                                     ->inputMode('number')
-                                    ->required()
-                                    ->label(__('currency::attributes.sell_price')),
+                                    ->label(__('currency::attributes.sell_price'))
+                                    ->numeric()
+                                    ->required(),
                             ])
                             ->action(function (array $data, Currency $record): void {
                                 $record->sell_price = $data['sell_price'];
                                 $record->save();
+
+                                if ($record->wasChanged('sell_price')){
+                                    Notification::make()
+                                    ->title(__(':iso_code Sell Price changed Successfully', ['iso_code' => $record->iso_code]))
+                                    ->success()
+                                    ->send(); 
+                                }
                             })
-                            ->label(__('Update %s', [__('currency::attributes.sell_price')])),
+                            ->label(fn(Currency $record) => __('Update :name', ['name' => $record->name]))
+                            ->requiresConfirmation(),
                     ),
 
                 ToggleColumn::make('is_default')
