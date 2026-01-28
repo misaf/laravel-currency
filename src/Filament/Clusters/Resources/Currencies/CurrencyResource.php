@@ -4,13 +4,13 @@ declare(strict_types=1);
 
 namespace Misaf\Currency\Filament\Clusters\Resources\Currencies;
 
-use App\Filament\Admin\Clusters\Currencies\CurrenciesCluster;
-use App\Filament\Admin\Clusters\Currencies\Resources\Currencies\Pages\CreateCurrency;
-use App\Filament\Admin\Clusters\Currencies\Resources\Currencies\Pages\EditCurrency;
-use App\Filament\Admin\Clusters\Currencies\Resources\Currencies\Pages\ListCurrencies;
-use App\Filament\Admin\Clusters\Currencies\Resources\Currencies\Pages\ViewCurrency;
-use App\Filament\Admin\Clusters\Currencies\Resources\Currencies\Schemas\CurrencyForm;
-use App\Filament\Admin\Clusters\Currencies\Resources\Currencies\Schemas\CurrencyTable;
+use Misaf\Currency\Filament\Clusters\CurrenciesCluster;
+use Misaf\Currency\Filament\Clusters\Resources\Currencies\Pages\CreateCurrency;
+use Misaf\Currency\Filament\Clusters\Resources\Currencies\Pages\EditCurrency;
+use Misaf\Currency\Filament\Clusters\Resources\Currencies\Pages\ListCurrencies;
+use Misaf\Currency\Filament\Clusters\Resources\Currencies\Pages\ViewCurrency;
+use Misaf\Currency\Filament\Clusters\Resources\Currencies\Schemas\CurrencyForm;
+use Misaf\Currency\Filament\Clusters\Resources\Currencies\Schemas\CurrencyTable;
 use Filament\Resources\Resource;
 use Filament\Schemas\Schema;
 use Filament\Tables\Table;

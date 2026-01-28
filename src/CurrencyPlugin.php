@@ -21,7 +21,7 @@ class CurrencyPlugin implements Plugin
     {
         $panel
             ->discoverClusters(
-                in: __DIR__ . '/Filament/Widgets',
+                in: __DIR__ . '/Filament/Clusters',
                 for: 'Misaf\\Currency\\Filament\\Clusters',
             )
             ->discoverPages(

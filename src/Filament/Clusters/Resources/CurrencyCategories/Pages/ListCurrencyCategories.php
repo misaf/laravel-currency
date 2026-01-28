@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Misaf\Currency\Filament\Clusters\Resources\CurrencyCategories\Pages;
 
-use App\Filament\Admin\Clusters\Currencies\Resources\CurrencyCategories\CurrencyCategoryResource;
+use Misaf\Currency\Filament\Clusters\Resources\CurrencyCategories\CurrencyCategoryResource;
 use Filament\Actions\CreateAction;
 use Filament\Resources\Pages\ListRecords;
 

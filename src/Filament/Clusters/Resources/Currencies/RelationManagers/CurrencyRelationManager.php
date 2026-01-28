@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Misaf\Currency\Filament\Clusters\Resources\Currencies\RelationManagers;
 
-use App\Filament\Admin\Clusters\Currencies\Resources\Currencies\CurrencyResource;
+use Misaf\Currency\Filament\Clusters\Resources\Currencies\CurrencyResource;
 use Filament\Resources\RelationManagers\RelationManager;
 use Filament\Schemas\Schema;
 use Filament\Tables\Table;

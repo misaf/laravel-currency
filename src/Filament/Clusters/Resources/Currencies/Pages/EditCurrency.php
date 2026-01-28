@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Misaf\Currency\Filament\Clusters\Resources\Currencies\Pages;
 
-use App\Filament\Admin\Clusters\Currencies\Resources\Currencies\CurrencyResource;
+use Misaf\Currency\Filament\Clusters\Resources\Currencies\CurrencyResource;
 use Filament\Actions\DeleteAction;
 use Filament\Actions\ViewAction;
 use Filament\Resources\Pages\EditRecord;
