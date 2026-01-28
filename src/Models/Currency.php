@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Misaf\Currency\Models;
+namespace Misaf\VendraCurrency\Models;
 
 use App\Traits\HasSlugOptionsTrait;
 use App\Traits\ThumbnailTableRecord;
@@ -12,7 +12,7 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\MorphMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Support\Carbon;
-use Misaf\Currency\Database\Factories\CurrencyFactory;
+use Misaf\VendraCurrency\Database\Factories\CurrencyFactory;
 use Misaf\Tenant\Traits\BelongsToTenant;
 use Spatie\Activitylog\LogOptions;
 use Spatie\Activitylog\Traits\LogsActivity;

@@ -2,11 +2,11 @@
 
 declare(strict_types=1);
 
-namespace Misaf\Currency\Observers;
+namespace Misaf\VendraCurrency\Observers;
 
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Queue\InteractsWithQueue;
-use Misaf\Currency\Models\CurrencyCategory;
+use Misaf\VendraCurrency\Models\CurrencyCategory;
 
 final class CurrencyCategoryObserver implements ShouldQueue
 {

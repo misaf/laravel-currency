@@ -2,11 +2,11 @@
 
 declare(strict_types=1);
 
-namespace Misaf\Currency\Database\Factories;
+namespace Misaf\VendraCurrency\Database\Factories;
 
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Support\Str;
-use Misaf\Currency\Models\CurrencyCategory;
+use Misaf\VendraCurrency\Models\CurrencyCategory;
 
 /**
  * @extends Factory<CurrencyCategory>

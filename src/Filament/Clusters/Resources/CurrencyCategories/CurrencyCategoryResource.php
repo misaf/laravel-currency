@@ -2,20 +2,20 @@
 
 declare(strict_types=1);
 
-namespace Misaf\Currency\Filament\Clusters\Resources\CurrencyCategories;
+namespace Misaf\VendraCurrency\Filament\Clusters\Resources\CurrencyCategories;
 
 use Filament\Resources\Resource;
 use Filament\Schemas\Schema;
 use Filament\Tables\Table;
-use Misaf\Currency\Filament\Clusters\CurrenciesCluster;
-use Misaf\Currency\Filament\Clusters\Resources\Currencies\RelationManagers\CurrencyRelationManager;
-use Misaf\Currency\Filament\Clusters\Resources\CurrencyCategories\Pages\CreateCurrencyCategory;
-use Misaf\Currency\Filament\Clusters\Resources\CurrencyCategories\Pages\EditCurrencyCategory;
-use Misaf\Currency\Filament\Clusters\Resources\CurrencyCategories\Pages\ListCurrencyCategories;
-use Misaf\Currency\Filament\Clusters\Resources\CurrencyCategories\Pages\ViewCurrencyCategory;
-use Misaf\Currency\Filament\Clusters\Resources\CurrencyCategories\Schemas\CurrencyCategoryForm;
-use Misaf\Currency\Filament\Clusters\Resources\CurrencyCategories\Schemas\CurrencyCategoryTable;
-use Misaf\Currency\Models\CurrencyCategory;
+use Misaf\VendraCurrency\Filament\Clusters\CurrenciesCluster;
+use Misaf\VendraCurrency\Filament\Clusters\Resources\Currencies\RelationManagers\CurrencyRelationManager;
+use Misaf\VendraCurrency\Filament\Clusters\Resources\CurrencyCategories\Pages\CreateCurrencyCategory;
+use Misaf\VendraCurrency\Filament\Clusters\Resources\CurrencyCategories\Pages\EditCurrencyCategory;
+use Misaf\VendraCurrency\Filament\Clusters\Resources\CurrencyCategories\Pages\ListCurrencyCategories;
+use Misaf\VendraCurrency\Filament\Clusters\Resources\CurrencyCategories\Pages\ViewCurrencyCategory;
+use Misaf\VendraCurrency\Filament\Clusters\Resources\CurrencyCategories\Schemas\CurrencyCategoryForm;
+use Misaf\VendraCurrency\Filament\Clusters\Resources\CurrencyCategories\Schemas\CurrencyCategoryTable;
+use Misaf\VendraCurrency\Models\CurrencyCategory;
 
 final class CurrencyCategoryResource extends Resource
 {

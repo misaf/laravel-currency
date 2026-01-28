@@ -1,10 +1,11 @@
 {
     "name": "misaf/vendra-currency",
     "description": "Multi-currency support system with translatable content and hierarchical currency categories",
-    "type": "library",
+    "type": "vendra-module",
     "license": "MIT",
     "keywords": [
         "laravel",
+        "filamentphp",
         "currency"
     ],
     "authors": [
@@ -15,23 +16,24 @@
     ],
     "require": {
         "php": "^8.3",
-        "staudenmeir/belongs-to-through": "^2.16.4",
         "spatie/laravel-activitylog": "^4.10.2",
-        "spatie/eloquent-sortable": "^4.5.0",
+        "spatie/eloquent-sortable": "^4.5.2",
         "spatie/laravel-sluggable": "^3.7.5"
     },
     "autoload": {
         "psr-4": {
-            "Misaf\\Currency\\": "src/",
-            "Misaf\\Currency\\Tests\\": "tests/",
-            "Misaf\\Currency\\Database\\Factories\\": "database/factories/",
-            "Misaf\\Currency\\Database\\Seeders\\": "database/seeders/"
+            "Misaf\\VendraCurrency\\": "src/",
+            "Misaf\\VendraCurrency\\Tests\\": "tests/",
+            "Misaf\\VendraCurrency\\Database\\Factories\\": "database/factories/",
+            "Misaf\\VendraCurrency\\Database\\Seeders\\": "database/seeders/"
         }
     },
+    "minimum-stability": "stable",
+    "prefer-stable": true,
     "extra": {
         "laravel": {
             "providers": [
-                "Misaf\\Currency\\Providers\\CurrencyServiceProvider"
+                "Misaf\\VendraCurrency\\Providers\\CurrencyServiceProvider"
             ]
         }
     }

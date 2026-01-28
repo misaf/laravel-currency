@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Misaf\Currency\Filament\Clusters\Resources\Currencies\Schemas;
+namespace Misaf\VendraCurrency\Filament\Clusters\Resources\Currencies\Schemas;
 
 use Awcodes\BadgeableColumn\Components\Badge;
 use Awcodes\BadgeableColumn\Components\BadgeableColumn;
@@ -26,7 +26,7 @@ use Filament\Tables\Filters\QueryBuilder\Constraints\DateConstraint;
 use Filament\Tables\Filters\QueryBuilder\Constraints\TextConstraint;
 use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
-use Misaf\Currency\Models\Currency;
+use Misaf\VendraCurrency\Models\Currency;
 
 final class CurrencyTable
 {

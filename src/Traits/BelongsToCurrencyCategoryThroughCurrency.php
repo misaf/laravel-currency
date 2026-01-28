@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-namespace Misaf\Currency\Traits;
+namespace Misaf\VendraCurrency\Traits;
 
-use Misaf\Currency\Models\Currency;
-use Misaf\Currency\Models\CurrencyCategory;
+use Misaf\VendraCurrency\Models\Currency;
+use Misaf\VendraCurrency\Models\CurrencyCategory;
 use Znck\Eloquent\Relations\BelongsToThrough;
 
 trait BelongsToCurrencyCategoryThroughCurrency

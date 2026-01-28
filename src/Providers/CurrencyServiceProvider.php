@@ -2,11 +2,11 @@
 
 declare(strict_types=1);
 
-namespace Misaf\Currency\Providers;
+namespace Misaf\VendraCurrency\Providers;
 
 use Filament\Panel;
 use Illuminate\Support\ServiceProvider;
-use Misaf\Currency\CurrencyPlugin;
+use Misaf\VendraCurrency\CurrencyPlugin;
 
 final class CurrencyServiceProvider extends ServiceProvider
 {

@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Misaf\Currency\Filament\Clusters\Resources\Currencies\Schemas;
+namespace Misaf\VendraCurrency\Filament\Clusters\Resources\Currencies\Schemas;
 
 use Filament\Forms\Components\Select;
 use Filament\Forms\Components\SpatieMediaLibraryFileUpload;

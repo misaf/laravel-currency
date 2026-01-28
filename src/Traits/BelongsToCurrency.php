@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-namespace Misaf\Currency\Traits;
+namespace Misaf\VendraCurrency\Traits;
 
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
-use Misaf\Currency\Models\Currency;
+use Misaf\VendraCurrency\Models\Currency;
 
 trait BelongsToCurrency
 {

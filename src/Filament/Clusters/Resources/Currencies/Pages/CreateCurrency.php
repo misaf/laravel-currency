@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-namespace Misaf\Currency\Filament\Clusters\Resources\Currencies\Pages;
+namespace Misaf\VendraCurrency\Filament\Clusters\Resources\Currencies\Pages;
 
 use Filament\Resources\Pages\CreateRecord;
-use Misaf\Currency\Filament\Clusters\Resources\Currencies\CurrencyResource;
+use Misaf\VendraCurrency\Filament\Clusters\Resources\Currencies\CurrencyResource;
 
 final class CreateCurrency extends CreateRecord
 {

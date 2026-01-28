@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Misaf\Currency\Filament\Clusters\Resources\CurrencyCategories\Schemas;
+namespace Misaf\VendraCurrency\Filament\Clusters\Resources\CurrencyCategories\Schemas;
 
 use Filament\Actions\ActionGroup;
 use Filament\Actions\BulkActionGroup;
@@ -18,7 +18,7 @@ use Filament\Tables\Filters\QueryBuilder;
 use Filament\Tables\Filters\QueryBuilder\Constraints\DateConstraint;
 use Filament\Tables\Filters\QueryBuilder\Constraints\TextConstraint;
 use Filament\Tables\Table;
-use Misaf\Currency\Models\CurrencyCategory;
+use Misaf\VendraCurrency\Models\CurrencyCategory;
 
 final class CurrencyCategoryTable
 {

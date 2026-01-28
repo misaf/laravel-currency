@@ -2,11 +2,11 @@
 
 declare(strict_types=1);
 
-namespace Misaf\Currency\Filament\Clusters\Resources\CurrencyCategories\Pages;
+namespace Misaf\VendraCurrency\Filament\Clusters\Resources\CurrencyCategories\Pages;
 
 use Filament\Actions\CreateAction;
 use Filament\Resources\Pages\ListRecords;
-use Misaf\Currency\Filament\Clusters\Resources\CurrencyCategories\CurrencyCategoryResource;
+use Misaf\VendraCurrency\Filament\Clusters\Resources\CurrencyCategories\CurrencyCategoryResource;
 
 final class ListCurrencyCategories extends ListRecords
 {

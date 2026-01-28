@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Misaf\Currency\Filament\Clusters;
+namespace Misaf\VendraCurrency\Filament\Clusters;
 
 use Filament\Clusters\Cluster;
 

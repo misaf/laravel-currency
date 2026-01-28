@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Misaf\Currency;
+namespace Misaf\VendraCurrency;
 
 use Filament\Contracts\Plugin;
 use Filament\Panel;
@@ -11,7 +11,7 @@ class CurrencyPlugin implements Plugin
 {
     public function getId(): string
     {
-        return 'currency';
+        return 'vendra-currency';
     }
 
     public static function make(): static
@@ -24,19 +24,19 @@ class CurrencyPlugin implements Plugin
         $panel
             ->discoverClusters(
                 in: __DIR__ . '/Filament/Clusters',
-                for: 'Misaf\\Currency\\Filament\\Clusters',
+                for: 'Misaf\\VendraCurrency\\Filament\\Clusters',
             )
             ->discoverPages(
                 in: __DIR__ . '/Filament/Pages',
-                for: 'Misaf\\Currency\\Filament\\Pages',
+                for: 'Misaf\\VendraCurrency\\Filament\\Pages',
             )
             ->discoverResources(
                 in: __DIR__ . '/Filament/Resources',
-                for: 'Misaf\\Currency\\Filament\\Resources',
+                for: 'Misaf\\VendraCurrency\\Filament\\Resources',
             )
             ->discoverWidgets(
                 in: __DIR__ . '/Filament/Widgets',
-                for: 'Misaf\\Currency\\Filament\\Widgets',
+                for: 'Misaf\\VendraCurrency\\Filament\\Widgets',
             );
     }
 

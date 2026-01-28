@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Misaf\Currency\Models;
+namespace Misaf\VendraCurrency\Models;
 
 use App\Traits\ThumbnailTableRecord;
 use Illuminate\Database\Eloquent\Attributes\ObservedBy;
@@ -11,9 +11,9 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\MorphMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Support\Carbon;
-use Misaf\Currency\Database\Factories\CurrencyCategoryFactory;
-use Misaf\Currency\Observers\CurrencyCategoryObserver;
-use Misaf\Currency\Traits\HasCurrency as HasCurrencyTrait;
+use Misaf\VendraCurrency\Database\Factories\CurrencyCategoryFactory;
+use Misaf\VendraCurrency\Observers\CurrencyCategoryObserver;
+use Misaf\VendraCurrency\Traits\HasCurrency as HasCurrencyTrait;
 use Misaf\Tenant\Traits\BelongsToTenant;
 use Spatie\Activitylog\LogOptions;
 use Spatie\Activitylog\Traits\LogsActivity;

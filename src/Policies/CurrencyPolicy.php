@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-namespace Misaf\Currency\Policies;
+namespace Misaf\VendraCurrency\Policies;
 
 use Illuminate\Auth\Access\HandlesAuthorization;
-use Misaf\Currency\Models\Currency;
+use Misaf\VendraCurrency\Models\Currency;
 use Misaf\User\Models\User;
 
 final class CurrencyPolicy

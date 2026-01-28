@@ -2,11 +2,11 @@
 
 declare(strict_types=1);
 
-namespace Misaf\Currency\Filament\Clusters\Resources\Currencies\Pages;
+namespace Misaf\VendraCurrency\Filament\Clusters\Resources\Currencies\Pages;
 
 use Filament\Actions\EditAction;
 use Filament\Resources\Pages\ViewRecord;
-use Misaf\Currency\Filament\Clusters\Resources\Currencies\CurrencyResource;
+use Misaf\VendraCurrency\Filament\Clusters\Resources\Currencies\CurrencyResource;
 
 final class ViewCurrency extends ViewRecord
 {

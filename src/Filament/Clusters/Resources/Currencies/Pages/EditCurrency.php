@@ -2,12 +2,12 @@
 
 declare(strict_types=1);
 
-namespace Misaf\Currency\Filament\Clusters\Resources\Currencies\Pages;
+namespace Misaf\VendraCurrency\Filament\Clusters\Resources\Currencies\Pages;
 
 use Filament\Actions\DeleteAction;
 use Filament\Actions\ViewAction;
 use Filament\Resources\Pages\EditRecord;
-use Misaf\Currency\Filament\Clusters\Resources\Currencies\CurrencyResource;
+use Misaf\VendraCurrency\Filament\Clusters\Resources\Currencies\CurrencyResource;
 
 final class EditCurrency extends EditRecord
 {

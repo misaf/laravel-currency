@@ -2,14 +2,14 @@
 
 declare(strict_types=1);
 
-namespace Misaf\Currency\Filament\Clusters\Resources\Currencies\RelationManagers;
+namespace Misaf\VendraCurrency\Filament\Clusters\Resources\Currencies\RelationManagers;
 
 use Filament\Resources\RelationManagers\RelationManager;
 use Filament\Schemas\Schema;
 use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Number;
-use Misaf\Currency\Filament\Clusters\Resources\Currencies\CurrencyResource;
+use Misaf\VendraCurrency\Filament\Clusters\Resources\Currencies\CurrencyResource;
 
 final class CurrencyRelationManager extends RelationManager
 {
