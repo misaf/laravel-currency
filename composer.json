@@ -1,21 +1,21 @@
 {
-    "name": "misaf/currency",
+    "name": "misaf/vendra-currency",
     "description": "Multi-currency support system with translatable content and hierarchical currency categories",
     "type": "library",
-    "version": "v1.0.3",
-    "license": "proprietary",
+    "license": "MIT",
     "keywords": [
         "laravel",
         "currency"
     ],
     "authors": [
         {
-            "name": "Misaf",
+            "name": "Ehsan Mahmoodi",
             "email": "misaf.1990@gmail.com"
         }
     ],
     "require": {
         "php": "^8.3",
+        "misaf/vendra": "^12.0",
         "staudenmeir/belongs-to-through": "^2.16.4",
         "spatie/laravel-activitylog": "^4.10.2",
         "spatie/eloquent-sortable": "^4.5.0",
@@ -29,7 +29,6 @@
             "Misaf\\Currency\\Database\\Seeders\\": "database/seeders/"
         }
     },
-    "minimum-stability": "stable",
     "extra": {
         "laravel": {
             "providers": [
