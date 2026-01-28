@@ -17,8 +17,19 @@
     "require": {
         "php": "^8.3",
         "spatie/laravel-activitylog": "^4.10.2",
+        "filament/spatie-laravel-media-library-plugin": "^4.6.1",
         "spatie/eloquent-sortable": "^4.5.2",
         "spatie/laravel-sluggable": "^3.7.5"
+    },
+    "require-dev": {
+        "fakerphp/faker": "^1.24.1",
+        "larastan/larastan": "^3.9.1",
+        "laravel/boost": "^1.8.10",
+        "laravel/pint": "^1.27",
+        "mockery/mockery": "^1.6.12",
+        "nunomaduro/collision": "^8.8.3",
+        "pestphp/pest": "^4.3.1",
+        "pestphp/pest-plugin-laravel": "^4.0"
     },
     "autoload": {
         "psr-4": {
@@ -35,6 +46,11 @@
             "providers": [
                 "Misaf\\VendraCurrency\\Providers\\CurrencyServiceProvider"
             ]
+        }
+    },
+    "config": {
+        "allow-plugins": {
+            "pestphp/pest-plugin": true
         }
     }
 }
