@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace Misaf\VendraCurrency\Models;
 
-use App\Traits\HasSlugOptionsTrait;
 use App\Traits\ThumbnailTableRecord;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
@@ -21,6 +20,7 @@ use Spatie\EloquentSortable\SortableTrait;
 use Spatie\MediaLibrary\HasMedia;
 use Spatie\MediaLibrary\InteractsWithMedia;
 use Spatie\MediaLibrary\MediaCollections\Models\Media;
+use Spatie\Sluggable\SlugOptions;
 
 /**
  * @property int $id
@@ -46,7 +46,6 @@ final class Currency extends Model implements HasMedia, Sortable
     use BelongsToTenant;
     /** @use HasFactory<CurrencyFactory> */
     use HasFactory;
-    use HasSlugOptionsTrait;
     use InteractsWithMedia, ThumbnailTableRecord {
         ThumbnailTableRecord::registerMediaCollections insteadof InteractsWithMedia;
         ThumbnailTableRecord::registerMediaConversions insteadof InteractsWithMedia;
@@ -122,5 +121,13 @@ final class Currency extends Model implements HasMedia, Sortable
     public function getActivitylogOptions(): LogOptions
     {
         return LogOptions::defaults()->logFillable()->logExcept(['id']);
+    }
+
+    public function getSlugOptions(): SlugOptions
+    {
+        return SlugOptions::create()
+            ->generateSlugsFrom('name')
+            ->saveSlugsTo('slug')
+            ->preventOverwrite();
     }
 }
