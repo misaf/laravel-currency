@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace Misaf\VendraCurrency\Tests;
 
 use Illuminate\Support\Facades\Http;
-use Misaf\VendraCurrency\CurrencyServiceProvider;
+use Misaf\VendraCurrency\Providers\CurrencyServiceProvider;
 use Orchestra\Testbench\TestCase as OrchestraTestCase;
 use Override;
 
