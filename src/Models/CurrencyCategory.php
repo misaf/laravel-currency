@@ -79,7 +79,7 @@ final class CurrencyCategory extends Model implements HasMedia, Sortable
         return $this->media();
     }
 
-    public function registerMediaCollections(): void
+    public function registerMediaConversions(?Media $media = null): void
     {
         $this->addMediaConversion('thumb-table')
             ->width(48)
@@ -101,8 +101,6 @@ final class CurrencyCategory extends Model implements HasMedia, Sortable
             ->width(1200)
             ->format('webp');
     }
-
-    public function registerMediaConversions(?Media $media = null): void {}
 
     public function getSlugOptions(): SlugOptions
     {
