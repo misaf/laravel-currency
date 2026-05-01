@@ -59,7 +59,8 @@ final class CurrencyCategoryForm
                     ->columnSpanFull()
                     ->image()
                     ->label(__('vendra-currency::attributes.image'))
-                    ->panelLayout('grid'),
+                    ->panelLayout('grid')
+                    ->responsiveImages(),
 
                 Toggle::make('status')
                     ->afterStateUpdated(fn(Livewire $livewire) => $livewire->validateOnly("data.status"))

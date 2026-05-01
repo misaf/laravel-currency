@@ -127,7 +127,8 @@ final class CurrencyForm
                     ->columnSpanFull()
                     ->image()
                     ->label(__('vendra-currency::attributes.image'))
-                    ->panelLayout('grid'),
+                    ->panelLayout('grid')
+                    ->responsiveImages(),
 
                 Toggle::make('is_default')
                     ->afterStateUpdated(fn(Livewire $livewire) => $livewire->validateOnly("data.is_default"))
