@@ -9,9 +9,11 @@ use Filament\Panel;
 
 final class CurrencyPlugin implements Plugin
 {
+    public const string ID = 'vendra-currency';
+
     public function getId(): string
     {
-        return 'vendra-currency';
+        return self::ID;
     }
 
     public static function make(): static
