@@ -4,17 +4,20 @@ declare(strict_types=1);
 
 namespace Misaf\VendraCurrency\Models;
 
+use Illuminate\Database\Eloquent\Attributes\Fillable;
+use Illuminate\Database\Eloquent\Attributes\Hidden;
 use Illuminate\Database\Eloquent\Attributes\ObservedBy;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\MorphMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Support\Carbon;
+use Misaf\VendraActivityLog\Concerns\HasDefaultActivityLogOptions;
 use Misaf\VendraCurrency\Database\Factories\CurrencyCategoryFactory;
 use Misaf\VendraCurrency\Observers\CurrencyCategoryObserver;
 use Misaf\VendraCurrency\Traits\HasCurrency as HasCurrencyTrait;
+use Misaf\VendraMultimedia\Concerns\HasDefaultMediaConversions;
 use Misaf\VendraTenant\Traits\BelongsToTenant;
-use Spatie\Activitylog\LogOptions;
 use Spatie\Activitylog\Traits\LogsActivity;
 use Spatie\EloquentSortable\Sortable;
 use Spatie\EloquentSortable\SortableTrait;
@@ -35,41 +38,40 @@ use Spatie\Sluggable\SlugOptions;
  * @property Carbon $updated_at
  * @property Carbon|null $deleted_at
  */
+#[Fillable(['name', 'description', 'slug', 'position', 'status'])]
+#[Hidden(['tenant_id'])]
 #[ObservedBy([CurrencyCategoryObserver::class])]
 final class CurrencyCategory extends Model implements HasMedia, Sortable
 {
     use BelongsToTenant;
     use HasCurrencyTrait;
+    use HasDefaultActivityLogOptions;
+
+    use HasDefaultMediaConversions, InteractsWithMedia {
+        HasDefaultMediaConversions::registerMediaConversions insteadof InteractsWithMedia;
+    }
 
     /** @use HasFactory<CurrencyCategoryFactory> */
     use HasFactory;
-
-    use InteractsWithMedia;
     use LogsActivity;
     use SoftDeletes;
     use SortableTrait;
 
-    protected $casts = [
-        'id'          => 'integer',
-        'tenant_id'   => 'integer',
-        'name'        => 'string',
-        'description' => 'string',
-        'slug'        => 'string',
-        'position'    => 'integer',
-        'status'      => 'boolean',
-    ];
-
-    protected $fillable = [
-        'name',
-        'description',
-        'slug',
-        'position',
-        'status',
-    ];
-
-    protected $hidden = [
-        'tenant_id',
-    ];
+    /**
+     * @return array<string, string>
+     */
+    protected function casts(): array
+    {
+        return [
+            'id'          => 'integer',
+            'tenant_id'   => 'integer',
+            'name'        => 'string',
+            'description' => 'string',
+            'slug'        => 'string',
+            'position'    => 'integer',
+            'status'      => 'boolean',
+        ];
+    }
 
     /**
      * @return MorphMany<Media, $this>
@@ -79,39 +81,11 @@ final class CurrencyCategory extends Model implements HasMedia, Sortable
         return $this->media();
     }
 
-    public function registerMediaConversions(?Media $media = null): void
-    {
-        $this->addMediaConversion('thumb-table')
-            ->width(48)
-            ->format('webp');
-
-        $this->addMediaConversion('small')
-            ->width(300)
-            ->format('webp');
-
-        $this->addMediaConversion('medium')
-            ->width(500)
-            ->format('webp');
-
-        $this->addMediaConversion('large')
-            ->width(800)
-            ->format('webp');
-
-        $this->addMediaConversion('extra-large')
-            ->width(1200)
-            ->format('webp');
-    }
-
     public function getSlugOptions(): SlugOptions
     {
         return SlugOptions::create()
             ->generateSlugsFrom('name')
             ->saveSlugsTo('slug')
             ->preventOverwrite();
-    }
-
-    public function getActivitylogOptions(): LogOptions
-    {
-        return LogOptions::defaults()->logFillable()->logExcept(['id']);
     }
 }
