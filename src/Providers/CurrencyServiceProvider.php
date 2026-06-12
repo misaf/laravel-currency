@@ -6,6 +6,7 @@ namespace Misaf\VendraCurrency\Providers;
 
 use Filament\Panel;
 use Illuminate\Foundation\Console\AboutCommand;
+use Misaf\VendraCurrency\Console\Commands\SeedCommand;
 use Misaf\VendraCurrency\CurrencyPlugin;
 use Spatie\LaravelPackageTools\Commands\InstallCommand;
 use Spatie\LaravelPackageTools\Package;
@@ -21,6 +22,7 @@ final class CurrencyServiceProvider extends PackageServiceProvider
             ->hasMigrations([
                 'create_currencies_table'
             ])
+            ->hasCommands(SeedCommand::class)
             ->hasInstallCommand(function (InstallCommand $command): void {
                 $command->askToStarRepoOnGitHub('misaf/vendra-currency');
             });
