@@ -6,6 +6,7 @@ namespace Misaf\VendraCurrency\Models;
 
 use Illuminate\Database\Eloquent\Attributes\Fillable;
 use Illuminate\Database\Eloquent\Attributes\Hidden;
+use Illuminate\Database\Eloquent\Attributes\UseFactory;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
@@ -13,6 +14,7 @@ use Illuminate\Database\Eloquent\Relations\MorphMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Support\Carbon;
 use Misaf\VendraActivityLog\Concerns\HasDefaultActivityLogOptions;
+use Misaf\VendraCurrency\Database\Factories\CurrencyFactory;
 use Misaf\VendraMultimedia\Concerns\HasDefaultMediaConversions;
 use Misaf\VendraTenant\Traits\BelongsToTenant;
 use Spatie\Activitylog\Traits\LogsActivity;
@@ -44,6 +46,7 @@ use Spatie\Sluggable\SlugOptions;
  */
 #[Fillable(['currency_category_id', 'name', 'description', 'slug', 'iso_code', 'conversion_rate', 'decimal_place', 'buy_price', 'sell_price', 'is_default', 'position', 'status'])]
 #[Hidden(['tenant_id'])]
+#[UseFactory(CurrencyFactory::class)]
 final class Currency extends Model implements HasMedia, Sortable
 {
     use BelongsToTenant;
@@ -53,7 +56,7 @@ final class Currency extends Model implements HasMedia, Sortable
         HasDefaultMediaConversions::registerMediaConversions insteadof InteractsWithMedia;
     }
 
-    /** @use HasFactory<Currency> */
+    /** @use HasFactory<CurrencyFactory> */
     use HasFactory;
     use LogsActivity;
     use SoftDeletes;
