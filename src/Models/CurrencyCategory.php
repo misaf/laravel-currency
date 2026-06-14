@@ -7,6 +7,7 @@ namespace Misaf\VendraCurrency\Models;
 use Illuminate\Database\Eloquent\Attributes\Fillable;
 use Illuminate\Database\Eloquent\Attributes\Hidden;
 use Illuminate\Database\Eloquent\Attributes\ObservedBy;
+use Illuminate\Database\Eloquent\Attributes\UseFactory;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\MorphMany;
@@ -41,6 +42,7 @@ use Spatie\Sluggable\SlugOptions;
 #[Fillable(['name', 'description', 'slug', 'position', 'status'])]
 #[Hidden(['tenant_id'])]
 #[ObservedBy([CurrencyCategoryObserver::class])]
+#[UseFactory(CurrencyCategoryFactory::class)]
 final class CurrencyCategory extends Model implements HasMedia, Sortable
 {
     use BelongsToTenant;
