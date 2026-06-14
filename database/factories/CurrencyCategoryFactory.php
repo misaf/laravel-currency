@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Misaf\VendraCurrency\Database\Factories;
 
+use Illuminate\Database\Eloquent\Factories\Attributes\UseModel;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Support\Str;
 use Misaf\VendraCurrency\Models\CurrencyCategory;
@@ -12,10 +13,9 @@ use Misaf\VendraTenant\Models\Tenant;
 /**
  * @extends Factory<CurrencyCategory>
  */
+#[UseModel(CurrencyCategory::class)]
 final class CurrencyCategoryFactory extends Factory
 {
-    protected $model = CurrencyCategory::class;
-
     public function definition(): array
     {
         return [
