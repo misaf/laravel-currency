@@ -4,136 +4,112 @@ declare(strict_types=1);
 
 namespace Misaf\VendraCurrency\Database\Seeders;
 
-use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\Validator;
+use Misaf\VendraCurrency\Database\Factories\CurrencyCategoryFactory;
+use Misaf\VendraCurrency\Database\Factories\CurrencyFactory;
 use Misaf\VendraCurrency\Models\Currency;
 use Misaf\VendraCurrency\Models\CurrencyCategory;
+use Misaf\VendraSupport\Database\Seeders\TenantDemoContentSeeder;
 use Misaf\VendraTenant\Models\Tenant;
 
-final class DemoContentSeeder extends Seeder
+final class DemoContentSeeder extends TenantDemoContentSeeder
 {
-    public function run(): void
+    protected function seedFactoryRecords(Tenant $tenant): void
     {
-        $tenant = Tenant::current();
-
-        if ( ! $tenant) {
-            $this->command?->error('Tenants not found. Please run TenantSeeder first.');
-            return;
-        }
-
-        $this->seedCurrencies($tenant);
+        CurrencyCategoryFactory::new()
+            ->forTenant($tenant)
+            ->enabled()
+            ->count(2)
+            ->create()
+            ->each(fn(CurrencyCategory $category): mixed => CurrencyFactory::new()
+                ->forCategory($category)
+                ->enabled()
+                ->count(2)
+                ->create());
     }
 
-    private function seedCurrencies(Tenant $tenant): void
+    protected function seedFixtureRecord(Tenant $tenant, array $record): void
     {
-        $categories = [
-            [
-                'name'        => 'Fiat Currencies',
-                'description' => 'Traditional government-issued currencies',
-                'slug'        => 'fiat-currencies',
-                'status'      => true,
-                'currencies'  => [
-                    [
-                        'name'            => 'US Dollar',
-                        'description'     => 'United States Dollar',
-                        'slug'            => 'us-dollar',
-                        'iso_code'        => 'USD',
-                        'conversion_rate' => 1.0,
-                        'decimal_place'   => 2,
-                        'buy_price'       => 100000,
-                        'sell_price'      => 100000,
-                        'is_default'      => true,
-                        'position'        => 1,
-                        'status'          => true,
-                    ],
-                    [
-                        'name'            => 'Euro',
-                        'description'     => 'European Union Euro',
-                        'slug'            => 'euro',
-                        'iso_code'        => 'EUR',
-                        'conversion_rate' => 0.85,
-                        'decimal_place'   => 2,
-                        'buy_price'       => 85000,
-                        'sell_price'      => 85000,
-                        'is_default'      => false,
-                        'position'        => 2,
-                        'status'          => true,
-                    ],
-                ],
-            ],
-            [
-                'name'        => 'Cryptocurrencies',
-                'description' => 'Digital or virtual currencies',
-                'slug'        => 'cryptocurrencies',
-                'status'      => true,
-                'currencies'  => [
-                    [
-                        'name'            => 'Bitcoin',
-                        'description'     => 'Bitcoin cryptocurrency',
-                        'slug'            => 'bitcoin',
-                        'iso_code'        => 'BTC',
-                        'conversion_rate' => 0.000025,
-                        'decimal_place'   => 8,
-                        'buy_price'       => 40000000,
-                        'sell_price'      => 40000000,
-                        'is_default'      => false,
-                        'position'        => 3,
-                        'status'          => true,
-                    ],
-                    [
-                        'name'            => 'Ethereum',
-                        'description'     => 'Ethereum cryptocurrency',
-                        'slug'            => 'ethereum',
-                        'iso_code'        => 'ETH',
-                        'conversion_rate' => 0.0004,
-                        'decimal_place'   => 8,
-                        'buy_price'       => 2500000,
-                        'sell_price'      => 2500000,
-                        'is_default'      => false,
-                        'position'        => 4,
-                        'status'          => true,
-                    ],
-                ],
-            ],
-        ];
+        $data = $this->validatedFixtureRecord($record);
 
-        foreach ($categories as $categoryData) {
-            $category = CurrencyCategory::query()->updateOrCreate(
-                [
-                    'tenant_id' => $tenant->id,
-                    'slug'      => $categoryData['slug'],
-                ],
-                [
-                    'name'        => $categoryData['name'],
-                    'description' => $categoryData['description'],
-                    'status'      => $categoryData['status'],
-                ],
-            );
+        $this->handleSeedFixtureRecord($tenant, $data);
+    }
 
-            foreach ($categoryData['currencies'] as $currencyData) {
-                Currency::query()->updateOrCreate(
-                    [
-                        'tenant_id' => $tenant->id,
-                        'slug'      => $currencyData['slug'],
-                    ],
-                    [
-                        'currency_category_id' => $category->id,
-                        'name'                 => $currencyData['name'],
-                        'description'          => $currencyData['description'],
-                        'iso_code'             => $currencyData['iso_code'],
-                        'conversion_rate'      => $currencyData['conversion_rate'],
-                        'decimal_place'        => $currencyData['decimal_place'],
-                        'buy_price'            => $currencyData['buy_price'],
-                        'sell_price'           => $currencyData['sell_price'],
-                        'is_default'           => $currencyData['is_default'],
-                        'position'             => $currencyData['position'],
-                        'status'               => $currencyData['status'],
-                    ],
-                );
-            }
+    /**
+     * @param array{name: string, description: string, slug: string, status: bool, currencies: list<array{name: string, description: string, slug: string, iso_code: string, conversion_rate: float, decimal_place: int, buy_price: int, sell_price: int, is_default: bool, position: int, status: bool}>} $data
+     */
+    private function handleSeedFixtureRecord(Tenant $tenant, array $data): void
+    {
+        $category = new CurrencyCategory([
+            'name'        => $data['name'],
+            'description' => $data['description'],
+            'slug'        => $data['slug'],
+            'status'      => $data['status'],
+        ]);
+
+        $category->tenant_id = $tenant->id;
+        $category->save();
+
+        foreach ($data['currencies'] as $currencyRecord) {
+            $this->handleCurrencyFixtureRecord($tenant, $category, $currencyRecord);
         }
+    }
 
-        $this->command?->info("Currencies seeded successfully for {$tenant->slug} tenant.");
-        $this->command?->info('- 2 currency categories (Fiat, Crypto)');
-        $this->command?->info('- 4 currencies (USD, EUR, BTC, ETH)');
+    /**
+     * @param array{name: string, description: string, slug: string, iso_code: string, conversion_rate: float, decimal_place: int, buy_price: int, sell_price: int, is_default: bool, position: int, status: bool} $currencyRecord
+     */
+    private function handleCurrencyFixtureRecord(Tenant $tenant, CurrencyCategory $category, array $currencyRecord): void
+    {
+        $currency = new Currency([
+            'currency_category_id' => $category->id,
+            'name'                 => $currencyRecord['name'],
+            'description'          => $currencyRecord['description'],
+            'slug'                 => $currencyRecord['slug'],
+            'iso_code'             => $currencyRecord['iso_code'],
+            'conversion_rate'      => $currencyRecord['conversion_rate'],
+            'decimal_place'        => $currencyRecord['decimal_place'],
+            'buy_price'            => $currencyRecord['buy_price'],
+            'sell_price'           => $currencyRecord['sell_price'],
+            'is_default'           => $currencyRecord['is_default'],
+            'position'             => $currencyRecord['position'],
+            'status'               => $currencyRecord['status'],
+        ]);
+
+        $currency->tenant_id = $tenant->id;
+        $currency->save();
+    }
+
+    /**
+     * @param array<string, mixed> $record
+     *
+     * @return array{name: string, description: string, slug: string, status: bool, currencies: list<array{name: string, description: string, slug: string, iso_code: string, conversion_rate: float, decimal_place: int, buy_price: int, sell_price: int, is_default: bool, position: int, status: bool}>}
+     */
+    private function validatedFixtureRecord(array $record): array
+    {
+        /** @var array{name: string, description: string, slug: string, status: bool, currencies: list<array{name: string, description: string, slug: string, iso_code: string, conversion_rate: float, decimal_place: int, buy_price: int, sell_price: int, is_default: bool, position: int, status: bool}>} $validated */
+        $validated = Validator::make(
+            data: $record,
+            rules: [
+                'name'                         => ['required', 'string'],
+                'description'                  => ['required', 'string'],
+                'slug'                         => ['required', 'string'],
+                'status'                       => ['required', 'boolean'],
+                'currencies'                   => ['required', 'array', 'list'],
+                'currencies.*'                 => ['required', 'array:name,description,slug,iso_code,conversion_rate,decimal_place,buy_price,sell_price,is_default,position,status'],
+                'currencies.*.name'            => ['required', 'string'],
+                'currencies.*.description'     => ['required', 'string'],
+                'currencies.*.slug'            => ['required', 'string'],
+                'currencies.*.iso_code'        => ['required', 'string'],
+                'currencies.*.conversion_rate' => ['required', 'numeric'],
+                'currencies.*.decimal_place'   => ['required', 'integer'],
+                'currencies.*.buy_price'       => ['required', 'integer'],
+                'currencies.*.sell_price'      => ['required', 'integer'],
+                'currencies.*.is_default'      => ['required', 'boolean'],
+                'currencies.*.position'        => ['required', 'integer'],
+                'currencies.*.status'          => ['required', 'boolean'],
+            ],
+        )->validate();
+
+        return $validated;
     }
 }
