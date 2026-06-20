@@ -26,6 +26,8 @@ final class CurrencyFactory extends Factory
             'description'          => fake()->realTextBetween(100, 200),
             'slug'                 => fn(array $attributes) => Str::slug($attributes['name']),
             'iso_code'             => fake()->languageCode(),
+            'conversion_rate'      => fake()->randomFloat(2, 0.1, 10),
+            'decimal_place'        => fake()->numberBetween(0, 4),
             'is_default'           => fake()->boolean(1),
             'buy_price'            => fake()->numberBetween(70000, 100000),
             'sell_price'           => fake()->numberBetween(70000, 100000),
