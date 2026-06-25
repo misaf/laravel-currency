@@ -9,11 +9,33 @@ use Misaf\VendraCurrency\Database\Factories\CurrencyCategoryFactory;
 use Misaf\VendraCurrency\Database\Factories\CurrencyFactory;
 use Misaf\VendraCurrency\Models\Currency;
 use Misaf\VendraCurrency\Models\CurrencyCategory;
-use Misaf\VendraSupport\Database\Seeders\TenantDemoContentSeeder;
+use Misaf\VendraSupport\Database\Seeders\DemoContentSeeder as BaseDemoContentSeeder;
+use Misaf\VendraTenant\Concerns\RequiresCurrentTenant;
 use Misaf\VendraTenant\Models\Tenant;
 
-final class DemoContentSeeder extends TenantDemoContentSeeder
+final class DemoContentSeeder extends BaseDemoContentSeeder
 {
+    use RequiresCurrentTenant;
+
+    protected function seedFactories(): void
+    {
+        $tenant = $this->currentTenant();
+
+        $this->seedFactoryRecords($tenant);
+    }
+
+    /**
+     * @param list<array<string, mixed>> $records
+     */
+    protected function seedFixtures(array $records): void
+    {
+        $tenant = $this->currentTenant();
+
+        foreach ($records as $record) {
+            $this->seedFixtureRecord($tenant, $record);
+        }
+    }
+
     protected function seedFactoryRecords(Tenant $tenant): void
     {
         CurrencyCategoryFactory::new()
@@ -21,8 +43,8 @@ final class DemoContentSeeder extends TenantDemoContentSeeder
             ->enabled()
             ->count(2)
             ->create()
-            ->each(fn(CurrencyCategory $category): mixed => CurrencyFactory::new()
-                ->forCategory($category)
+            ->each(fn(CurrencyCategory $currencyCategory): mixed => CurrencyFactory::new()
+                ->forCategory($currencyCategory)
                 ->enabled()
                 ->count(2)
                 ->create());
@@ -36,32 +58,62 @@ final class DemoContentSeeder extends TenantDemoContentSeeder
     }
 
     /**
-     * @param array{name: string, description: string, slug: string, status: bool, currencies: list<array{name: string, description: string, slug: string, iso_code: string, conversion_rate: float, decimal_place: int, buy_price: int, sell_price: int, is_default: bool, position: int, status: bool}>} $data
+     * @param array{
+     *     name: string,
+     *     description: string,
+     *     slug: string,
+     *     status: bool,
+     *     currencies: list<array{
+     *         name: string,
+     *         description: string,
+     *         slug: string,
+     *         iso_code: string,
+     *         conversion_rate: float,
+     *         decimal_place: int,
+     *         buy_price: int,
+     *         sell_price: int,
+     *         is_default: bool,
+     *         position: int,
+     *         status: bool
+     *     }>
+     * } $data
      */
     private function handleSeedFixtureRecord(Tenant $tenant, array $data): void
     {
-        $category = new CurrencyCategory([
+        $currencyCategory = new CurrencyCategory([
             'name'        => $data['name'],
             'description' => $data['description'],
             'slug'        => $data['slug'],
             'status'      => $data['status'],
         ]);
 
-        $category->tenant_id = $tenant->id;
-        $category->save();
+        $currencyCategory->tenant_id = $tenant->id;
+        $currencyCategory->save();
 
         foreach ($data['currencies'] as $currencyRecord) {
-            $this->handleCurrencyFixtureRecord($tenant, $category, $currencyRecord);
+            $this->handleCurrencyFixtureRecord($tenant, $currencyCategory, $currencyRecord);
         }
     }
 
     /**
-     * @param array{name: string, description: string, slug: string, iso_code: string, conversion_rate: float, decimal_place: int, buy_price: int, sell_price: int, is_default: bool, position: int, status: bool} $currencyRecord
+     * @param array{
+     *     name: string,
+     *     description: string,
+     *     slug: string,
+     *     iso_code: string,
+     *     conversion_rate: float,
+     *     decimal_place: int,
+     *     buy_price: int,
+     *     sell_price: int,
+     *     is_default: bool,
+     *     position: int,
+     *     status: bool
+     * } $currencyRecord
      */
-    private function handleCurrencyFixtureRecord(Tenant $tenant, CurrencyCategory $category, array $currencyRecord): void
+    private function handleCurrencyFixtureRecord(Tenant $tenant, CurrencyCategory $currencyCategory, array $currencyRecord): void
     {
         $currency = new Currency([
-            'currency_category_id' => $category->id,
+            'currency_category_id' => $currencyCategory->id,
             'name'                 => $currencyRecord['name'],
             'description'          => $currencyRecord['description'],
             'slug'                 => $currencyRecord['slug'],
@@ -82,11 +134,48 @@ final class DemoContentSeeder extends TenantDemoContentSeeder
     /**
      * @param array<string, mixed> $record
      *
-     * @return array{name: string, description: string, slug: string, status: bool, currencies: list<array{name: string, description: string, slug: string, iso_code: string, conversion_rate: float, decimal_place: int, buy_price: int, sell_price: int, is_default: bool, position: int, status: bool}>}
+     * @return array{
+     *     name: string,
+     *     description: string,
+     *     slug: string,
+     *     status: bool,
+     *     currencies: list<array{
+     *         name: string,
+     *         description: string,
+     *         slug: string,
+     *         iso_code: string,
+     *         conversion_rate: float,
+     *         decimal_place: int,
+     *         buy_price: int,
+     *         sell_price: int,
+     *         is_default: bool,
+     *         position: int,
+     *         status: bool
+     *     }>
+     * }
      */
     private function validatedFixtureRecord(array $record): array
     {
-        /** @var array{name: string, description: string, slug: string, status: bool, currencies: list<array{name: string, description: string, slug: string, iso_code: string, conversion_rate: float, decimal_place: int, buy_price: int, sell_price: int, is_default: bool, position: int, status: bool}>} $validated */
+        /** @var array{
+         *     name: string,
+         *     description: string,
+         *     slug: string,
+         *     status: bool,
+         *     currencies: list<array{
+         *         name: string,
+         *         description: string,
+         *         slug: string,
+         *         iso_code: string,
+         *         conversion_rate: float,
+         *         decimal_place: int,
+         *         buy_price: int,
+         *         sell_price: int,
+         *         is_default: bool,
+         *         position: int,
+         *         status: bool
+         *     }>
+         * } $validated
+         */
         $validated = Validator::make(
             data: $record,
             rules: [
@@ -112,4 +201,5 @@ final class DemoContentSeeder extends TenantDemoContentSeeder
 
         return $validated;
     }
+
 }

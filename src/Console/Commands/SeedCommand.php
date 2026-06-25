@@ -7,9 +7,9 @@ namespace Misaf\VendraCurrency\Console\Commands;
 use Misaf\VendraCurrency\CurrencyPlugin;
 use Misaf\VendraCurrency\Database\Seeders\DemoContentSeeder;
 use Misaf\VendraCurrency\Database\Seeders\PermissionPolicySeeder;
-use Misaf\VendraSupport\Console\Commands\BaseSeedCommand;
+use Misaf\VendraTenant\Console\Commands\TenantSeedCommand;
 
-final class SeedCommand extends BaseSeedCommand
+final class SeedCommand extends TenantSeedCommand
 {
     protected const string MODULE_NAME = CurrencyPlugin::ID;
 
