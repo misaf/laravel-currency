@@ -30,6 +30,19 @@
                 "is_default": false,
                 "position": 2,
                 "status": true
+            },
+            {
+                "name": "Toman",
+                "description": "Iranian Toman",
+                "slug": "toman",
+                "iso_code": "IRR",
+                "conversion_rate": 1,
+                "decimal_place": 2,
+                "buy_price": 85000,
+                "sell_price": 85000,
+                "is_default": false,
+                "position": 2,
+                "status": true
             }
         ]
     },
