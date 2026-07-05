@@ -18,7 +18,7 @@ use Misaf\VendraCurrency\Database\Factories\CurrencyCategoryFactory;
 use Misaf\VendraCurrency\Observers\CurrencyCategoryObserver;
 use Misaf\VendraCurrency\Traits\HasCurrency as HasCurrencyTrait;
 use Misaf\VendraMultimedia\Concerns\HasDefaultMediaConversions;
-use Misaf\VendraTenant\Traits\BelongsToTenant;
+use Misaf\VendraSupport\Traits\BelongsToTenant;
 use Spatie\Activitylog\Traits\LogsActivity;
 use Spatie\EloquentSortable\Sortable;
 use Spatie\EloquentSortable\SortableTrait;

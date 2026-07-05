@@ -7,8 +7,8 @@ namespace Misaf\VendraCurrency\Database\Seeders;
 use Misaf\VendraCurrency\CurrencyPlugin;
 use Misaf\VendraCurrency\Enums\CurrencyCategoryPolicyEnum;
 use Misaf\VendraCurrency\Enums\CurrencyPolicyEnum;
+use Misaf\VendraSupport\Concerns\RequiresCurrentTenant;
 use Misaf\VendraSupport\Database\Seeders\PermissionPolicySeeder as BasePermissionPolicySeeder;
-use Misaf\VendraTenant\Concerns\RequiresCurrentTenant;
 
 final class PermissionPolicySeeder extends BasePermissionPolicySeeder
 {
