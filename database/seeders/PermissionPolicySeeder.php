@@ -7,21 +7,11 @@ namespace Misaf\VendraCurrency\Database\Seeders;
 use Misaf\VendraCurrency\CurrencyPlugin;
 use Misaf\VendraCurrency\Enums\CurrencyCategoryPolicyEnum;
 use Misaf\VendraCurrency\Enums\CurrencyPolicyEnum;
-use Misaf\VendraSupport\Concerns\RequiresCurrentTenant;
 use Misaf\VendraSupport\Database\Seeders\PermissionPolicySeeder as BasePermissionPolicySeeder;
 
 final class PermissionPolicySeeder extends BasePermissionPolicySeeder
 {
-    use RequiresCurrentTenant;
-
     protected const string MODULE_NAME = CurrencyPlugin::ID;
-
-    public function run(): void
-    {
-        $tenant = $this->currentTenant();
-
-        $this->seedPermissionPolicies($tenant->getKey());
-    }
 
     /**
      * @return list<string>

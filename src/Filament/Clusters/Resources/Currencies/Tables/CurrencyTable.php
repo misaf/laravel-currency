@@ -33,9 +33,9 @@ use Filament\Tables\Table;
 use Misaf\VendraCurrency\Actions\Currency\SetBuyPriceAction;
 use Misaf\VendraCurrency\Actions\Currency\SetDefaultCurrencyAction;
 use Misaf\VendraCurrency\Actions\Currency\SetSellPriceAction;
-use Misaf\VendraCurrency\Filament\Clusters\Resources\Concerns\HasDefaultAvatarImageUrl;
 use Misaf\VendraCurrency\Models\Currency;
 use Misaf\VendraCurrency\Models\CurrencyCategory;
+use Misaf\VendraSupport\Filament\Concerns\HasDefaultAvatarImageUrl;
 
 final class CurrencyTable
 {
@@ -112,12 +112,12 @@ final class CurrencyTable
 
                             if ($buyPrice) {
                                 Notification::make()
-                                    ->title(__(':iso_code Buy Price changed Successfully', ['iso_code' => $record->iso_code]))
+                                    ->title(__('vendra-currency::messages.buy_price_changed_successfully', ['iso_code' => $record->iso_code]))
                                     ->success()
                                     ->send();
                             }
                         })
-                        ->label(fn(Currency $record) => __('Update :name', ['name' => $record->name]))
+                        ->label(fn(Currency $record) => __('vendra-currency::messages.update_name', ['name' => $record->name]))
                         ->requiresConfirmation(),
                 ),
 
@@ -140,12 +140,12 @@ final class CurrencyTable
 
                             if ($sellPrice) {
                                 Notification::make()
-                                    ->title(__(':iso_code Sell Price changed Successfully', ['iso_code' => $record->iso_code]))
+                                    ->title(__('vendra-currency::messages.sell_price_changed_successfully', ['iso_code' => $record->iso_code]))
                                     ->success()
                                     ->send();
                             }
                         })
-                        ->label(fn(Currency $record) => __('Update :name', ['name' => $record->name]))
+                        ->label(fn(Currency $record) => __('vendra-currency::messages.update_name', ['name' => $record->name]))
                         ->requiresConfirmation(),
                 ),
 

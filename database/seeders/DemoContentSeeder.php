@@ -9,37 +9,15 @@ use Misaf\VendraCurrency\Database\Factories\CurrencyCategoryFactory;
 use Misaf\VendraCurrency\Database\Factories\CurrencyFactory;
 use Misaf\VendraCurrency\Models\Currency;
 use Misaf\VendraCurrency\Models\CurrencyCategory;
-use Misaf\VendraSupport\Concerns\RequiresCurrentTenant;
 use Misaf\VendraSupport\Database\Seeders\DemoContentSeeder as BaseDemoContentSeeder;
-use Misaf\VendraTenant\Models\Tenant;
 
 final class DemoContentSeeder extends BaseDemoContentSeeder
 {
-    use RequiresCurrentTenant;
-
     protected function seedFactories(): void
     {
-        $tenant = $this->currentTenant();
+        $this->currentTenantOrNull();
 
-        $this->seedFactoryRecords($tenant);
-    }
-
-    /**
-     * @param list<array<string, mixed>> $records
-     */
-    protected function seedFixtures(array $records): void
-    {
-        $tenant = $this->currentTenant();
-
-        foreach ($records as $record) {
-            $this->seedFixtureRecord($tenant, $record);
-        }
-    }
-
-    protected function seedFactoryRecords(Tenant $tenant): void
-    {
         CurrencyCategoryFactory::new()
-            ->forTenant($tenant)
             ->enabled()
             ->count(2)
             ->create()
@@ -50,11 +28,16 @@ final class DemoContentSeeder extends BaseDemoContentSeeder
                 ->create());
     }
 
-    protected function seedFixtureRecord(Tenant $tenant, array $record): void
+    /**
+     * @param list<array<string, mixed>> $records
+     */
+    protected function seedFixtures(array $records): void
     {
-        $data = $this->validatedFixtureRecord($record);
+        $this->currentTenantOrNull();
 
-        $this->handleSeedFixtureRecord($tenant, $data);
+        foreach ($records as $record) {
+            $this->handleSeedFixtureRecord($this->validatedFixtureRecord($record));
+        }
     }
 
     /**
@@ -78,20 +61,17 @@ final class DemoContentSeeder extends BaseDemoContentSeeder
      *     }>
      * } $data
      */
-    private function handleSeedFixtureRecord(Tenant $tenant, array $data): void
+    private function handleSeedFixtureRecord(array $data): void
     {
-        $currencyCategory = new CurrencyCategory([
+        $currencyCategory = CurrencyCategory::create([
             'name'        => $data['name'],
             'description' => $data['description'],
             'slug'        => $data['slug'],
             'status'      => $data['status'],
         ]);
 
-        $currencyCategory->tenant_id = $tenant->id;
-        $currencyCategory->save();
-
         foreach ($data['currencies'] as $currencyRecord) {
-            $this->handleCurrencyFixtureRecord($tenant, $currencyCategory, $currencyRecord);
+            $this->handleCurrencyFixtureRecord($currencyCategory, $currencyRecord);
         }
     }
 
@@ -110,9 +90,9 @@ final class DemoContentSeeder extends BaseDemoContentSeeder
      *     status: bool
      * } $currencyRecord
      */
-    private function handleCurrencyFixtureRecord(Tenant $tenant, CurrencyCategory $currencyCategory, array $currencyRecord): void
+    private function handleCurrencyFixtureRecord(CurrencyCategory $currencyCategory, array $currencyRecord): void
     {
-        $currency = new Currency([
+        Currency::create([
             'currency_category_id' => $currencyCategory->id,
             'name'                 => $currencyRecord['name'],
             'description'          => $currencyRecord['description'],
@@ -126,9 +106,6 @@ final class DemoContentSeeder extends BaseDemoContentSeeder
             'position'             => $currencyRecord['position'],
             'status'               => $currencyRecord['status'],
         ]);
-
-        $currency->tenant_id = $tenant->id;
-        $currency->save();
     }
 
     /**
@@ -201,5 +178,4 @@ final class DemoContentSeeder extends BaseDemoContentSeeder
 
         return $validated;
     }
-
 }

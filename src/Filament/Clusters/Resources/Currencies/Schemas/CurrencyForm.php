@@ -16,7 +16,7 @@ use Filament\Schemas\Schema;
 use Illuminate\Support\Str;
 use Illuminate\Validation\Rules\Unique;
 use Livewire\Component as Livewire;
-use Misaf\VendraTenant\Models\Tenant;
+use Misaf\VendraSupport\Support\TenantAwareness;
 
 final class CurrencyForm
 {
@@ -45,10 +45,8 @@ final class CurrencyForm
                     ->live(onBlur: true)
                     ->required()
                     ->unique(
-                        modifyRuleUsing: function (Unique $rule): void {
-                            $rule->where('tenant_id', Tenant::current()?->id)
-                                ->withoutTrashed();
-                        },
+                        modifyRuleUsing: fn(Unique $rule): Unique => TenantAwareness::constrainUniqueRule($rule)
+                            ->withoutTrashed(),
                     ),
 
                 TextInput::make('slug')
