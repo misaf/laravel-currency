@@ -5,71 +5,71 @@ declare(strict_types=1);
 namespace Misaf\VendraCurrency\Policies;
 
 use Illuminate\Auth\Access\HandlesAuthorization;
+use Illuminate\Contracts\Auth\Access\Authorizable;
 use Misaf\VendraCurrency\Enums\CurrencyPolicyEnum;
 use Misaf\VendraCurrency\Models\Currency;
-use Misaf\VendraUser\Models\User;
 
 final class CurrencyPolicy
 {
     use HandlesAuthorization;
 
-    public function create(User $user): bool
+    public function create(Authorizable $user): bool
     {
-        return $user->can(CurrencyPolicyEnum::CREATE);
+        return $user->can(CurrencyPolicyEnum::CREATE->value);
     }
 
-    public function delete(User $user, Currency $currency): bool
+    public function delete(Authorizable $user, Currency $currency): bool
     {
-        return $user->can(CurrencyPolicyEnum::DELETE);
+        return $user->can(CurrencyPolicyEnum::DELETE->value);
     }
 
-    public function deleteAny(User $user): bool
+    public function deleteAny(Authorizable $user): bool
     {
-        return $user->can(CurrencyPolicyEnum::DELETE_ANY);
+        return $user->can(CurrencyPolicyEnum::DELETE_ANY->value);
     }
 
-    public function forceDelete(User $user, Currency $currency): bool
+    public function forceDelete(Authorizable $user, Currency $currency): bool
     {
-        return $user->can(CurrencyPolicyEnum::FORCE_DELETE);
+        return $user->can(CurrencyPolicyEnum::FORCE_DELETE->value);
     }
 
-    public function forceDeleteAny(User $user): bool
+    public function forceDeleteAny(Authorizable $user): bool
     {
-        return $user->can(CurrencyPolicyEnum::FORCE_DELETE_ANY);
+        return $user->can(CurrencyPolicyEnum::FORCE_DELETE_ANY->value);
     }
 
-    public function reorder(User $user): bool
+    public function reorder(Authorizable $user): bool
     {
-        return $user->can(CurrencyPolicyEnum::REORDER);
+        return $user->can(CurrencyPolicyEnum::REORDER->value);
     }
 
-    public function replicate(User $user, Currency $currency): bool
+    public function replicate(Authorizable $user, Currency $currency): bool
     {
-        return $user->can(CurrencyPolicyEnum::REPLICATE);
+        return $user->can(CurrencyPolicyEnum::REPLICATE->value);
     }
 
-    public function restore(User $user, Currency $currency): bool
+    public function restore(Authorizable $user, Currency $currency): bool
     {
-        return $user->can(CurrencyPolicyEnum::RESTORE);
+        return $user->can(CurrencyPolicyEnum::RESTORE->value);
     }
 
-    public function restoreAny(User $user): bool
+    public function restoreAny(Authorizable $user): bool
     {
-        return $user->can(CurrencyPolicyEnum::RESTORE_ANY);
+        return $user->can(CurrencyPolicyEnum::RESTORE_ANY->value);
     }
 
-    public function update(User $user, Currency $currency): bool
+    public function update(Authorizable $user, Currency $currency): bool
     {
-        return $user->can(CurrencyPolicyEnum::UPDATE);
+        return $user->can(CurrencyPolicyEnum::UPDATE->value);
     }
 
-    public function view(User $user, Currency $currency): bool
+    public function view(Authorizable $user, Currency $currency): bool
     {
-        return $user->can(CurrencyPolicyEnum::VIEW);
+        return $user->can(CurrencyPolicyEnum::VIEW->value);
     }
 
-    public function viewAny(User $user): bool
+    public function viewAny(Authorizable $user): bool
     {
-        return $user->can(CurrencyPolicyEnum::VIEW_ANY);
+        return $user->can(CurrencyPolicyEnum::VIEW_ANY->value);
     }
 }

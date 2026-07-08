@@ -13,13 +13,12 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\MorphMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Support\Carbon;
-use Misaf\VendraActivityLog\Concerns\HasDefaultActivityLogOptions;
 use Misaf\VendraCurrency\Database\Factories\CurrencyCategoryFactory;
 use Misaf\VendraCurrency\Observers\CurrencyCategoryObserver;
 use Misaf\VendraCurrency\Traits\HasCurrency as HasCurrencyTrait;
 use Misaf\VendraMultimedia\Concerns\HasDefaultMediaConversions;
+use Misaf\VendraSupport\Contracts\ShouldLogActivity;
 use Misaf\VendraSupport\Traits\BelongsToTenant;
-use Spatie\Activitylog\Traits\LogsActivity;
 use Spatie\EloquentSortable\Sortable;
 use Spatie\EloquentSortable\SortableTrait;
 use Spatie\MediaLibrary\HasMedia;
@@ -43,11 +42,10 @@ use Spatie\Sluggable\SlugOptions;
 #[Hidden(['tenant_id'])]
 #[ObservedBy([CurrencyCategoryObserver::class])]
 #[UseFactory(CurrencyCategoryFactory::class)]
-final class CurrencyCategory extends Model implements HasMedia, Sortable
+final class CurrencyCategory extends Model implements HasMedia, Sortable, ShouldLogActivity
 {
     use BelongsToTenant;
     use HasCurrencyTrait;
-    use HasDefaultActivityLogOptions;
 
     use HasDefaultMediaConversions, InteractsWithMedia {
         HasDefaultMediaConversions::registerMediaConversions insteadof InteractsWithMedia;
@@ -55,7 +53,6 @@ final class CurrencyCategory extends Model implements HasMedia, Sortable
 
     /** @use HasFactory<CurrencyCategoryFactory> */
     use HasFactory;
-    use LogsActivity;
     use SoftDeletes;
     use SortableTrait;
 
