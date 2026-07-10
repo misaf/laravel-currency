@@ -14,7 +14,7 @@ final class CurrenciesCluster extends Cluster
 
     public static function getNavigationGroup(): string
     {
-        return __('navigation.billing_management');
+        return __('vendra-currency::navigation.billing_management');
     }
 
     public static function getNavigationLabel(): string
@@ -24,6 +24,6 @@ final class CurrenciesCluster extends Cluster
 
     public static function getClusterBreadcrumb(): string
     {
-        return __('navigation.billing_management');
+        return __('vendra-currency::navigation.billing_management');
     }
 }
