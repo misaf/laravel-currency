@@ -54,7 +54,6 @@ final class CurrencyForm
                     ->columnSpan(['lg' => 1])
                     ->helperText(__('vendra-currency::attributes.slug_helper_text'))
                     ->label(__('vendra-currency::attributes.slug'))
-                    ->label(__('vendra-currency::attributes.slug'))
                     ->required()
                     ->unique(modifyRuleUsing: fn(Unique $rule) => $rule->withoutTrashed()),
 

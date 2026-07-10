@@ -30,9 +30,9 @@ use Filament\Tables\Filters\QueryBuilder\Constraints\RelationshipConstraint\Oper
 use Filament\Tables\Filters\QueryBuilder\Constraints\TextConstraint;
 use Filament\Tables\Grouping\Group;
 use Filament\Tables\Table;
-use Misaf\VendraCurrency\Actions\Currency\SetBuyPriceAction;
-use Misaf\VendraCurrency\Actions\Currency\SetDefaultCurrencyAction;
-use Misaf\VendraCurrency\Actions\Currency\SetSellPriceAction;
+use Misaf\VendraCurrency\Filament\Clusters\Resources\Currencies\Actions\SetBuyPriceAction;
+use Misaf\VendraCurrency\Filament\Clusters\Resources\Currencies\Actions\SetDefaultCurrencyAction;
+use Misaf\VendraCurrency\Filament\Clusters\Resources\Currencies\Actions\SetSellPriceAction;
 use Misaf\VendraCurrency\Models\Currency;
 use Misaf\VendraCurrency\Models\CurrencyCategory;
 use Misaf\VendraSupport\Filament\Concerns\HasDefaultAvatarImageUrl;

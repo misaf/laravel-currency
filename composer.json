@@ -1,6 +1,6 @@
 {
 	"name": "misaf/vendra-currency",
-	"description": "Multi-currency support system with translatable content and hierarchical currency categories",
+	"description": "Multi-currency support system with hierarchical currency categories",
 	"license": "MIT",
 	"type": "vendra-module",
 	"keywords": [
@@ -17,6 +17,11 @@
 			"role": "Developer"
 		}
 	],
+	"homepage": "https://github.com/misaf/vendra-currency",
+	"support": {
+		"issues": "https://github.com/misaf/vendra-currency/issues",
+		"source": "https://github.com/misaf/vendra-currency"
+	},
 	"require": {
 		"php": "^8.3",
 		"awcodes/filament-badgeable-column": "^4.0",
