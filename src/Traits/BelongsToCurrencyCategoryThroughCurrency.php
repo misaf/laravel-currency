@@ -8,7 +8,7 @@ use Misaf\VendraCurrency\Models\Currency;
 use Misaf\VendraCurrency\Models\CurrencyCategory;
 use Znck\Eloquent\Relations\BelongsToThrough;
 
-trait BelongsToCurrencyCategoryThroughCurrency
+trait BelongsToCurrencyCategoryThroughCurrency /** @phpstan-ignore trait.unused */
 {
     /**
      * @return BelongsToThrough<CurrencyCategory, $this>

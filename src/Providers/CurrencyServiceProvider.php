@@ -8,6 +8,9 @@ use Filament\Panel;
 use Illuminate\Foundation\Console\AboutCommand;
 use Misaf\VendraCurrency\Console\Commands\SeedCommand;
 use Misaf\VendraCurrency\CurrencyPlugin;
+use Misaf\VendraCurrency\Models\Currency;
+use Misaf\VendraSupport\Contracts\CurrencyResolver;
+use Misaf\VendraSupport\Support\EloquentCurrencyResolver;
 use Misaf\VendraSupport\Support\TenantSeeders;
 use Spatie\LaravelPackageTools\Commands\InstallCommand;
 use Spatie\LaravelPackageTools\Package;
@@ -31,6 +34,11 @@ final class CurrencyServiceProvider extends PackageServiceProvider
 
     public function packageRegistered(): void
     {
+        $this->app->singleton(
+            CurrencyResolver::class,
+            fn(): EloquentCurrencyResolver => new EloquentCurrencyResolver(Currency::class),
+        );
+
         Panel::configureUsing(function (Panel $panel): void {
             if ('admin' !== $panel->getId()) {
                 return;

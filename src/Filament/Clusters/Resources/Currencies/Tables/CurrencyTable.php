@@ -108,7 +108,13 @@ final class CurrencyTable
                                 ->required(),
                         ])
                         ->action(function (Currency $record, array $data): void {
-                            $buyPrice = (new SetBuyPriceAction())->execute($record, $data['buy_price']);
+                            $price = $data['buy_price'] ?? null;
+
+                            if ( ! is_numeric($price)) {
+                                return;
+                            }
+
+                            $buyPrice = (new SetBuyPriceAction())->execute($record, (int) $price);
 
                             if ($buyPrice) {
                                 Notification::make()
@@ -136,7 +142,13 @@ final class CurrencyTable
                                 ->required(),
                         ])
                         ->action(function (array $data, Currency $record): void {
-                            $sellPrice = (new SetSellPriceAction())->execute($record, $data['sell_price']);
+                            $price = $data['sell_price'] ?? null;
+
+                            if ( ! is_numeric($price)) {
+                                return;
+                            }
+
+                            $sellPrice = (new SetSellPriceAction())->execute($record, (int) $price);
 
                             if ($sellPrice) {
                                 Notification::make()

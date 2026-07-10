@@ -8,9 +8,11 @@ use Filament\Actions\CreateAction;
 use Filament\Resources\RelationManagers\RelationManager;
 use Filament\Schemas\Schema;
 use Filament\Tables\Table;
+use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Number;
 use Misaf\VendraCurrency\Filament\Clusters\Resources\Currencies\CurrencyResource;
+use Misaf\VendraCurrency\Models\Currency;
 
 final class CurrencyRelationManager extends RelationManager
 {
@@ -36,7 +38,9 @@ final class CurrencyRelationManager extends RelationManager
     public static function getBadge(Model $ownerRecord, string $pageClass): string
     {
         /** @var Collection<int, Currency> $currencies */
-        $currencies = $ownerRecord->getRelation('currencies') ?? collect();
+        $currencies = $ownerRecord->relationLoaded('currencies')
+            ? $ownerRecord->getRelation('currencies')
+            : $ownerRecord->newCollection();
 
         return (string) Number::format($currencies->count());
     }

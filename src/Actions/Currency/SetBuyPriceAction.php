@@ -11,7 +11,7 @@ final class SetBuyPriceAction
 {
     public function execute(Currency $currency, int $price): bool
     {
-        if (null !== $currency->sell_price && $price > $currency->sell_price) {
+        if ($price > $currency->sell_price) {
             throw new Exception('Buy price cannot be greater than sell price.');
         }
 

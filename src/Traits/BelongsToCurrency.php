@@ -7,7 +7,7 @@ namespace Misaf\VendraCurrency\Traits;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Misaf\VendraCurrency\Models\Currency;
 
-trait BelongsToCurrency
+trait BelongsToCurrency /** @phpstan-ignore trait.unused */
 {
     /**
      * @return BelongsTo<Currency, $this>
